@@ -26,31 +26,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr th:each="order:${orders}">
+                  <tr
+                    th:each="order : ${orders}"
+                    th:unless="${orders.isEmpty()}"
+                  >
                     <th th:text="${order.id}" scope="row"></th>
                     <td th:text="${order.name}"></td>
                     <td th:text="${order.price}"></td>
                     <td><a th:href="@{/orders/show(id=${order.id})}"></a></td>
                     <td class="btn btn-primary btn-sm">Show</td>
                   </tr>
+                  <tr th:if="${orders.isEmpty()}">
+                    <td colspan="5">
+                      <p class="text-center pt-3">No orders right now !</p>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
-
-              <!-- Pagination -->
-              <!--  <nav aria-label="Page navigation example">
-						    
-							<ul  class="pagination justify-content-center">
-								<li class="page-item" th:classappend="${products.number==0}?disabled">
-								  <a class="page-link" th:href="@{/products(page=${products.number-1})}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-								</li>
-								<li th:each="pageNumber:${pageNumbers}" class="page-item" th:classappend="${pageNumber-1==products.number}?active"><a th:text="${pageNumber}" class="page-link" th:href="@{/products(page=${pageNumber-1})}"></a></li>
-								<li class="page-item" th:classappend="${products.number+1==products.totalPages}?disabled">
-								  <a class="page-link" th:href="@{/products(page=${products.number+1})}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-								</li>
-								
-							</ul>
-							
-						</nav>-->
             </div>
           </div>
         </div>
